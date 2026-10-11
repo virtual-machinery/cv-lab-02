@@ -1,11 +1,6 @@
 import argparse
 import subprocess
 from pathlib import Path
-import torch
-import torchvision
-from torchvision import transforms, models
-from torchvision.io import decode_image
-from torchvision.models import resnet50, ResNet50_Weights
 import torchvision.transforms.functional as F
 import torchvision.models.detection as detection
 from torchvision.utils import draw_bounding_boxes
@@ -17,15 +12,16 @@ parser.add_argument("-s", "--split", action="store_true")
 args = parser.parse_args()
 res = '"1920x1080"'
 # running ffmpeg
-try:
-    result = subprocess.run(f"ffmpeg -hwaccel videotoolbox -i {args.file} -s {res} -r {args.frames} frames/output_%03d.png", shell=True, text=True, capture_output=True)
-except subprocess.CalledProcessError():
-    print(result.stderr)
+if args.split:
+    try:
+        result = subprocess.run(f"ffmpeg -hwaccel videotoolbox -i {args.file} -s {res} -r {args.frames} frames/output_%03d.png", shell=True, check=True, text=True, capture_output=True)
+    except subprocess.CalledProcessError() as e:
+        print(e.stderr)
 
 # running object classification on one image
 image_path = args.file.parent / "frames" / "output_001.png"
 img = Image.open(image_path)
-img.convert("RGB")
+img = img.convert("RGB")
 print(img.size,img.mode)
 
 weights = detection.FasterRCNN_ResNet50_FPN_V2_Weights.DEFAULT
