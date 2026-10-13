@@ -54,3 +54,9 @@ for image_path in sorted(image_folder_path.glob("input_*.png")):
     )
     image = F.to_pil_image(box.detach())
     image.save(f"output/out{image_path.stem[-3:]}.png")
+config = "scale=-2:480"
+try:
+    result = subprocess.run(f"ffmpeg -framerate 5 -i out%003d.png -vf {config} out.gif", shell=True,check=True,text=True, capture_output=True)
+except subprocess.CalledProcessError as e:
+    print(e.stderr)
+]
