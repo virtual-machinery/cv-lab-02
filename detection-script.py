@@ -27,7 +27,7 @@ model.to(device)
 model.eval()
 preprocess = weights.transforms()
 
-# running object detection on one image
+# running object detection
 image_folder_path = args.file.parent / "frames"
 new_path = args.file.parent / "output"
 new_path.mkdir(exist_ok=True)
@@ -47,16 +47,17 @@ for image_path in sorted(image_folder_path.glob("input_*.png")):
         image,
         boxes=prediction["boxes"],
         labels=labels,
-        colors="white",
-        width=2,
+        colors="navy",
+        width=5,
         font="bakery.ttf",
         font_size=50
     )
     image = F.to_pil_image(box.detach())
     image.save(f"output/out{image_path.stem[-3:]}.png")
 config = "scale=-2:480"
+
+#compiling gif
 try:
-    result = subprocess.run(f"ffmpeg -framerate 5 -i out%003d.png -vf {config} out.gif", shell=True,check=True,text=True, capture_output=True)
+    result = subprocess.run(f"ffmpeg -framerate 5 -i output/out%003d.png -vf {config} out.gif", shell=True,check=True,text=True, capture_output=True)
 except subprocess.CalledProcessError as e:
     print(e.stderr)
-]
