@@ -8,11 +8,11 @@ def split(args):
         except subprocess.CalledProcessError as e:
             print(e.stderr)
     return args.file.parent
-def gif(folder_name):
+def gif(folder_name, c):
     config = "scale=-2:480"
     # compiling gif
     try:
-        result = subprocess.run(f"ffmpeg -framerate 5 -i {folder_name}/out%003d.png -vf {config} gifs/out.gif", shell=True,
+        result = subprocess.run(f"ffmpeg -framerate 5 -i {folder_name}/out%003d.png -vf {config} gifs/out{c}.gif", shell=True,
                                 check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         print(e.stderr)

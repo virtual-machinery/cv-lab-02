@@ -27,8 +27,8 @@ def main():
     args, path = parse_args()
     split(args)
     segment(path)
-    gif("segmentation_output")
+    gif("segmentation_output",1)
     detect(path)
-    gif("detection_output")
+    gif("detection_output",2)
 if __name__ == "__main__":
     main()
