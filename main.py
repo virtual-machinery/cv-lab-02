@@ -30,7 +30,7 @@ def main():
     split(args)
     if args.segmentation:
         segment(path)
-    gif("segmentation_output",1)
+        gif("segmentation_output",1)
     if args.detection:
         detect(path)
         gif("detection_output",2)
