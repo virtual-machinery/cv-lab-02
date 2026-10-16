@@ -7,8 +7,10 @@
 <img width="1078" height="549" alt="Screenshot 2026-10-16 at 12 30 54 PM" src="https://github.com/user-attachments/assets/84cdc2d0-9d4d-456b-962d-1c0d0adf0837" />
 4. первая гиф:
 https://github.com/virtual-machinery/cv-lab-02/blob/30096da28deedbfe43079ff0b0fe6f67165318a7/gifs/out1.gif
-6. вторая гиф:
+
+5. вторая гиф:
 https://github.com/virtual-machinery/cv-lab-02/blob/30096da28deedbfe43079ff0b0fe6f67165318a7/gifs/out1.gif
+
 7. вывод:
 
 Детектор видит отдельные объекты и показывает каждый из них отдельно, рисуя вокруг них прямоугольники с категориями. Прямоугольники слишком общие и не выделяют объект точно, а ещё ими сложно выделять объекты нестандартной форме, как змеи или птицы
