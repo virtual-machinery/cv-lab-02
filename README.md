@@ -6,7 +6,7 @@
 <img width="1078" height="549" alt="Screenshot 2026-10-16 at 12 31 06 PM" src="https://github.com/user-attachments/assets/8fab9bed-a644-43ab-a755-9e02d655ad62" />
 <img width="1078" height="549" alt="Screenshot 2026-10-16 at 12 30 54 PM" src="https://github.com/user-attachments/assets/84cdc2d0-9d4d-456b-962d-1c0d0adf0837" />
 4. первая гиф:
-https://github.com/virtual-machinery/cv-lab-02/blob/30096da28deedbfe43079ff0b0fe6f67165318a7/gifs/out1.gif
+https://github.com/virtual-machinery/cv-lab-02/blob/8efb6bb16f2a65ff0cf8b0f46d2958ec80caf5be/gifs/out2.gif
 
 5. вторая гиф:
 https://github.com/virtual-machinery/cv-lab-02/blob/30096da28deedbfe43079ff0b0fe6f67165318a7/gifs/out1.gif
