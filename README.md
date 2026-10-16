@@ -6,6 +6,6 @@
 <img width="1078" height="549" alt="Screenshot 2026-10-16 at 12 31 06 PM" src="https://github.com/user-attachments/assets/8fab9bed-a644-43ab-a755-9e02d655ad62" />
 <img width="1078" height="549" alt="Screenshot 2026-10-16 at 12 30 54 PM" src="https://github.com/user-attachments/assets/84cdc2d0-9d4d-456b-962d-1c0d0adf0837" />
 4. первая гиф:
-![object detection](gifs/out1.gif)
+![object_detection](./gifs/out2.gif)
 5. вторая гиф:
-![semantic_segmentation](gifs/out2.gif)
+![semantic_segmentation](./gifs/out1.gif)
