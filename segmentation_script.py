@@ -3,6 +3,9 @@ import torchvision.models.segmentation as segmentation
 from torchvision.utils import draw_segmentation_masks
 import torch
 from PIL import Image
+from PIL import ImageDraw
+g = torch.Generator().manual_seed(0)
+palette = [tuple(c.tolist()) for c in torch.randint(0, 255, (21, 3), generator=g)]
 def segment(path):        # running obj segmentation
     # model init
     weights = segmentation.DeepLabV3_ResNet50_Weights.DEFAULT
@@ -14,7 +17,7 @@ def segment(path):        # running obj segmentation
     image_folder_path = path / "frames"
     for image_path in sorted(image_folder_path.glob("input_*.png")):
         result = segment_core(preprocess, device, model, weights, image_path)
-        F.to_pil_image(result).save(f"segmentation_output/out{image_path.stem[-3:]}.png")
+        result.save(f"segmentation_output/out{image_path.stem[-3:]}.png")
 
 def segment_core(preprocess, device, model, weights, image_path):
     image = Image.open(image_path).convert("RGB")
@@ -27,11 +30,16 @@ def segment_core(preprocess, device, model, weights, image_path):
     label_map = out.argmax(dim=1)[0].cpu()
     masks = label_map == torch.arange(len(weights.meta["categories"]))[:, None, None]
     image = F.resize(image, list(label_map.shape))
-    result = draw_segmentation_masks(
-        image=image,
-        masks=masks[1:],
-        alpha=0.8
-    )
-    return result
+    image = F.resize(image, list(label_map.shape))
+    result = draw_segmentation_masks(image, masks[1:], alpha=0.6, colors=palette[1:])
+    present = [c for c in range(1, len(weights.meta["categories"])) if masks[c].any()]
+    pil = F.to_pil_image(result)
+    draw = ImageDraw.Draw(pil)
+    draw.rectangle([0, 0, 140, 10 + 16 * len(present)], fill="black")  # dark backdrop
+    for i, c in enumerate(present):
+        y = 8 + i * 16
+        draw.rectangle([8, y, 18, y + 10], fill=palette[c])  # color swatch
+        draw.text((24, y), weights.meta["categories"][c], fill="white")  # name
+    return pil
 
 

@@ -10,6 +10,8 @@ def parse_args():
     parser.add_argument("--file", type=Path,required=True)
     parser.add_argument("--frames", type=int, default=5, required=False)
     parser.add_argument("-s", "--split", action="store_true")
+    parser.add_argument( "--detection", action="store_true")
+    parser.add_argument("--segmentation", action="store_true")
     args = parser.parse_args()
 
     new_path = args.file.parent / "frames"
@@ -26,9 +28,11 @@ def parse_args():
 def main():
     args, path = parse_args()
     split(args)
-    segment(path)
+    if args.segmentation:
+        segment(path)
     gif("segmentation_output",1)
-    detect(path)
-    gif("detection_output",2)
+    if args.detection:
+        detect(path)
+        gif("detection_output",2)
 if __name__ == "__main__":
     main()
